@@ -1,0 +1,42 @@
+# @package _global_
+
+# to execute this experiment run:
+# python train.py experiment=example
+
+defaults:
+  - override /data: inviscid_burgers
+  - override /model: pifno_law
+  # - override /callbacks: default
+  - override /trainer: default
+
+# all parameters below will be merged with parameters from default configurations set above
+# this allows you to overwrite only specified parameters
+
+tags: ["pino_shock"]
+
+seed: 1
+
+trainer:
+  min_epochs: 1
+  max_epochs: 2000
+  accelerator: "gpu"
+
+logger:
+  aim:
+    experiment: "pifno_law_burgers"
+
+model:
+  compile_model: true
+  lambda_ic: 0.1
+  beta_reg: 0.5
+  lambda_f: 1.0
+  lambda_data: 1.0
+  spatial_padding: 0
+  padding: 0
+  start_blend_ratio: 0.05
+  warmup_ratio: 0.15
+  loss_method:
+    _target_: src.models.components.loss.burgers_loss.inviscid_burgers_fft_weight
+    _partial_: true
+  net2:
+    activation: tanh

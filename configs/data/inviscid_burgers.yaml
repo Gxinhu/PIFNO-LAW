@@ -1,0 +1,16 @@
+_target_: src.data.datamodule1d.DataModule1D
+
+n_train: 32
+n_test: 200
+sub_x: 1
+sub_t: 1
+val_ratio: 0.2
+batch_size: 20
+num_workers: 0
+pin_memory: True
+data_builder:
+  _target_: src.data.components.burgers.BurgersDatasetBuilder
+  _partial_: True
+  data_dir: "${paths.data_dir}/burgers.h5"
+  sub_x: 1
+  sub_t: 1

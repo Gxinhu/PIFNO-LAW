@@ -1,0 +1,2 @@
+epoch_timer:
+  _target_: src.callbacks.epoch_timer.EpochTimingCallback

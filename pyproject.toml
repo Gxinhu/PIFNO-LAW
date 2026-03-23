@@ -1,0 +1,171 @@
+[project]
+name = "PIFNO-LAW"
+version = "0.1.0"
+description = "Physics-Informed Fourier Neural Operator with Learned Adaptive Weighting (PIFNO-LAW)"
+requires-python = "<3.12,>=3.10"
+dependencies = [
+  "aim>=3.29.1",
+  "conflictfree>=0.1.8",
+  "cvxpy>=1.6.0",
+  "fireducks>=1.2.2",
+  "h5py>=3.12.1",
+  "huggingface-hub>=1.7.1",
+  "hydra-colorlog>=1.2.0",
+  "hydra-optuna-sweeper>=1.2.0",
+  "imageio>=2.37.0",
+  "ipykernel>=6.29.5",
+  "lightning>=2.5.0.post0",
+  "mat73>=0.65",
+  "matplotlib>=3.10.0",
+  "mpld3>=0.5.10",
+  "rich>=13.9.4",
+  "rootutils>=1.0.7",
+  "scienceplots>=2.1.1",
+  "scipy>=1.15.1",
+  "seaborn>=0.13.2",
+  "setuptools>=81.0.0",
+]
+
+[tool.pyright]
+root = ['src']
+include = ["src"]
+exclude = ["**/node_modules", "**/__pycache__"]
+venvPath = "."
+venv = ".venv"
+
+
+useLibraryCodeForTypes = true
+
+typeCheckingMode = "off"
+reportMissingImports = "information"
+reportMissingTypeStubs = "information"
+# reportUnknownMemberType = "information"
+diagnosticMode = 'workspace'
+"stubPath" = ".ruff_cache"
+
+[tool.coverage.report]
+exclude_lines = [
+  "pragma: nocover",
+  "raise NotImplementedError",
+  "raise NotImplementedError()",
+  "if __name__ == .__main__.:",
+]
+
+#  Please uncomment the following lines to change the source to pku mirror if you are in China
+# [[tool.uv.index]]
+# url = "https://mirrors.pku.edu.cn/pypi/web/simple"
+# default = true
+
+[tool.ruff]
+indent-width = 4
+line-length = 80
+preview = true
+lint.select = [
+  "F",    # Pyflakes
+  "N",
+  "I",
+  "W6",
+  "E71",
+  "E72",
+  "E112", # no-indented-block
+  "E113", # unexpected-indentation
+  # "E124",
+  "E203", # whitespace-before-punctuation
+  "E272", # multiple-spaces-before-keyword
+  "E303", # too-many-blank-lines
+  "E304", # blank-line-after-decorator
+  "E501", # line-too-long
+  # "E502",
+  "E702",    # multiple-statements-on-one-line-semicolon
+  "E703",    # useless-semicolon
+  "E731",    # lambda-assignment
+  "W191",    # tab-indentation
+  "W291",    # trailing-whitespace
+  "W293",    # blank-line-with-whitespace
+  "UP039",   # unnecessary-class-parentheses
+  "C416",    # unnecessary-comprehension
+  "RET506",  # superfluous-else-raise
+  "RET507",  # superfluous-else-continue
+  "A",       # builtin-variable-shadowing, builtin-argument-shadowing, builtin-attribute-shadowing
+  "SIM105",  # suppressible-exception
+  "FURB110", # if-exp-instead-of-or-operator
+]
+
+lint.ignore = [
+  "E501", # line too long, handled by black
+  "B008", # do not perform function calls in argument defaults
+  "C901", # too complex
+  "E402",
+  "N812",
+]
+exclude = ["tests/"]
+[tool.ruff.format]
+# Like Black, use double quotes for strings.
+quote-style = "double"
+
+# Like Black, indent with spaces, rather than tabs.
+indent-style = "space"
+
+# Like Black, respect magic trailing commas.
+skip-magic-trailing-comma = false
+
+# Like Black, automatically detect the appropriate line ending.
+line-ending = "auto"
+
+# Enable auto-formatting of code examples in docstrings. Markdown,
+# reStructuredText code/literal blocks and doctests are all supported.
+#
+# This is currently disabled by default, but it is planned for this
+# to be opt-out in the future.
+docstring-code-format = false
+
+# Set the line length limit used when formatting code snippets in
+# docstrings.
+#
+# This only has an effect when the `docstring-code-format` setting is
+# enabled.
+docstring-code-line-length = "dynamic"
+[tool.ruff.lint.flake8-quotes]
+inline-quotes = "double"
+
+
+[tool.pytest.ini_options]
+addopts = [
+  "--color=yes",
+  "--durations=0",
+  "--strict-markers",
+  "--doctest-modules",
+]
+filterwarnings = ["ignore::DeprecationWarning", "ignore::UserWarning"]
+markers = ["slow: slow tests"]
+minversion = "6.0"
+testpaths = "tests/"
+
+[dependency-groups]
+dev = ["tabulate>=0.9.0"]
+
+
+[tool.pyrefly]
+python_version = "3.11"
+python-platform = "linux"
+project-includes = ["**/*.py*"]
+search_path = [".venv/lib/python3.11/site-packages", '.']
+
+project_excludes = [
+  "**/.[!/.]*",     # Hidden files and folders.
+  "**/*venv/**",    # venv directories.
+  ".mypy_cache",
+  ".pytest_cache",
+  ".ruff_cache",
+  ".tox",
+  "__pypackages__",
+  "_build",
+  "build",
+  "dist",
+  "node_modules",
+  "tests",
+]
+
+[tool.pyrefly.errors]
+bad-override = false
+missing-attribute = false

@@ -1,0 +1,30 @@
+# @package _global_
+
+# to execute this experiment run:
+# python train.py experiment=example
+
+defaults:
+  - override /data: inviscid_burgers
+  - override /model: fno
+  - override /trainer: default
+
+# all parameters below will be merged with parameters from default configurations set above
+# this allows you to overwrite only specified parameters
+
+tags: ["pino_shock"]
+
+seed: 1
+
+trainer:
+  min_epochs: 1
+  max_epochs: 2000
+  accelerator: "gpu"
+
+logger:
+  aim:
+    experiment: "fno_burgers"
+
+model:
+  compile_model: true
+  padding: 0
+  spatial_padding: 0

@@ -1,0 +1,29 @@
+_target_: src.models.pifno_law.PIFNOLAWModule
+
+optimizer:
+  _target_: torch.optim.Adam
+  _partial_: true
+  lr: 0.001
+
+net1:
+  _target_: src.models.components.fno.fourier2d.FNN2d
+  layers: [16, 24, 24, 32, 32]
+  modes1: [15, 12, 9, 9]
+  modes2: [15, 12, 9, 9]
+  fc_dim: 128
+  activation: gelu
+# compile model for faster training with pytorch 2.0
+
+net2:
+  _target_: src.models.components.fno.fourier2d.FNN2d
+  layers: [16, 16, 16]
+  modes1: [8, 4]
+  modes2: [8, 4]
+  fc_dim: 128
+  in_dim: 5
+  activation: tanh
+  last_activation: True
+
+compile_model: true
+
+padding: 5

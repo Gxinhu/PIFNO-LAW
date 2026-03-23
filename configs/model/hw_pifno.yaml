@@ -1,0 +1,18 @@
+_target_: src.models.standard_pifno.StandardPIFNOModule
+
+optimizer:
+  _target_: torch.optim.Adam
+  _partial_: true
+  lr: 0.001
+
+net:
+  _target_: src.models.components.fno.fourier2d.FNN2d
+  layers: [16, 24, 24, 32, 32]
+  modes1: [15, 12, 9, 9]
+  modes2: [15, 12, 9, 9]
+  fc_dim: 128
+  activation: gelu
+
+compile_model: true
+
+padding: 5
