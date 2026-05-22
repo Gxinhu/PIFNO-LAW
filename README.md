@@ -1,9 +1,33 @@
+# PIFNO-LAW
 
-## 🚀 Quick Start
+This repository contains the official implementation for the paper:
+
+**Learned Adaptive Weighting for Physics-Informed Fourier Neural Operators:
+Solving Discontinuous PDEs with Limited Data**
+
+PIFNO-LAW is a physics-informed Fourier neural operator framework for solving
+partial differential equations with discontinuous solutions in limited-data
+settings. The method uses a dual-operator design: a solution operator predicts
+the PDE solution, while an auxiliary Fourier neural operator learns a dynamic
+spatial weight field for the physics loss. This learned adaptive weighting helps
+stabilize training near shocks and other discontinuities, where large localized
+residuals can otherwise dominate gradients and degrade the learned operator.
+
+The codebase includes training and evaluation utilities for the discontinuous
+PDE benchmarks used in the paper, including configurations for PIFNO-LAW,
+unweighted physics-informed FNO baselines, static heuristic weighting baselines,
+and data-driven FNO variants.
+
+
+
+
+## Quick Start
 
 We recommend using [uv](https://github.com/astral-sh/uv) (a fast Python package manager), but you can also use `pip` or `conda`.
 
-#### Option A: Using uv (Recommended)
+### 1. Install Dependencies
+
+#### Option A: Using uv
 ```bash
 # Clone and enter the repository
 git clone https://github.com/Gxinhu/PIFNO-LAW.git
@@ -103,3 +127,20 @@ python src/train.py -m experiment=pino_shock_law data.n_train=50 seed=1 logger=c
 
 ## References
 [PINO_Application](https://github.com/shawnrosofsky/PINO_Applications.git)
+
+## Citation
+
+If this repository is useful for your research, please cite our paper:
+
+```bibtex
+@article{HU2026117079,
+  title = {Learned Adaptive Weighting for Physics-Informed Fourier Neural Operators: Solving Discontinuous PDEs with Limited Data},
+  journal = {Applied Mathematical Modelling},
+  pages = {117079},
+  year = {2026},
+  issn = {0307-904X},
+  doi = {https://doi.org/10.1016/j.apm.2026.117079},
+  url = {https://www.sciencedirect.com/science/article/pii/S0307904X26003409},
+  author = {Xin Hu and Bo An and Yongke Guan and Liang Xu and Min Yu and Dong Li},
+}
+```
